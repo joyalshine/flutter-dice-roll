@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class DiceArea extends StatefulWidget {
@@ -8,7 +10,12 @@ class DiceArea extends StatefulWidget {
 }
 
 class _DiceAreaState extends State<DiceArea> {
-  void changeDice() {}
+  var currentDiceIndex = 2;
+  void changeDice() {
+    setState(() {
+      currentDiceIndex = Random().nextInt(6) + 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +23,11 @@ class _DiceAreaState extends State<DiceArea> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/dice-1.png',
+          'assets/images/dice-$currentDiceIndex.png',
           width: 200,
         ),
         OutlinedButton(
-          onPressed: () {},
+          onPressed: changeDice,
           style: OutlinedButton.styleFrom(backgroundColor: Colors.green),
           child: const Text(
             'Generate',
